@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <link href="matrixStyle.css" type="text/css" rel="stylesheet">
+      <title> Multiplying Matrices </title>
+  </head>
+
+  <body>
+    <div id="main">
+      <h1>Matrix Multiplier</h1>
+      <p class="start">First Matrix Dimensions <select id="row1" class="instantiate"></select> X <select id="col1" class="instantiate"></select></p>
+      <p class="start">Second Matrix Dimensions <select id="row2" class="instantiate"></select> X <select id="col2" class="instantiate"></select></p>
+      <p> <button id="createButton"> Create Matrices </button> </p>
+    </div>
+    <div id ="matrices">
+      <table id="matrix1">
+      </table>
+      <table id="matrix2">
+      </table>
+    </div>
+    <div id="calcDiv">
+    </div>
+    <div id="answer">
+    
+    </div>
+    <script src="jquery-3.3.1.js"></script>
+    <script src="modal-window.js"></script>
+    <script src="matrixScript.js"></script>
+  </body>
+
+</html>

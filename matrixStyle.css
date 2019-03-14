@@ -1,0 +1,150 @@
+/**Main div, holds the title, both selectors and the create button**/
+#main
+{
+    margin: auto;
+    text-align: center;
+}
+
+body{
+  background-color: #20D2FF;
+  margin: 1%;
+}
+
+/**Container for both matrices**/
+#matrices
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.styleMatrix
+{
+  padding: 2px;
+  margin: 10px;
+  text-align: center;
+  border: 5px ridge #1C6EA4;
+}
+
+/**Style for individual cells of the matrices**/
+input[type="text"]
+{
+  text-align: center;
+  font-family: monospace;
+  border: solid 2px black;
+  width: 50px;
+  height: 20px;
+}
+
+input[type="text"]:hover
+{
+  background-color: #E9823E;
+}
+
+/** Main Title**/
+h1
+{
+  display: inline;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 5px;
+  border: 3px solid #3985E9;
+  border-radius: 15px;
+  background-color: #14D4E9;
+  text-decoration: underline solid #3985E9;
+}
+
+/** Style for button to create matrices**/
+#createButton
+{
+  border: 3px solid #3985E9;
+  border-radius: 15px;
+  background-color: #14D4E9;
+}
+#createButton:hover
+{
+  background-color:#E9823E;
+  border-color: #B66530;
+}
+
+/** div that holds the button to invoke calculations and the add zeros button**/
+#calcDiv
+{
+  display: flex;
+  justify-content: center;
+}
+
+#calcButton
+{
+  border: 3px solid #3985E9;
+  border-radius: 15px;
+  background-color: #14D4E9;
+}
+
+#calcButton:hover
+{
+  background-color: #8EDA73;
+  border-color: #5F924D;
+}
+
+#addZero
+{
+  border: 3px solid #3985E9;
+  border-radius: 15px;
+  background-color: #14D4E9;
+}
+
+#addZero:hover
+{
+  border-color: #DACD20;
+  background-color: #F1F11A;
+}
+
+/** style for modal and the close button**/
+.modal
+{
+  position: absolute;
+  z-index: 1000;
+  border: 3px solid #CA5948;
+  border-radius: 15px;
+  background-color: #FF9A81;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-close
+{
+  background-color: red;
+  border:3px solid red;
+  border-radius: 20px;
+  color: white;
+  position: absolute;
+}
+
+/** style for Answer **/
+/* container for answer matrix*/
+#answer
+{
+  visibility: hidden;
+  margin-top: 40%;
+  font-family: monospace;
+}
+
+/*the matrix that holds the answer*/
+#answerMatrix
+{
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+/*individual cell of the answer matrix*/
+.answerCell
+{
+  border:3px solid black;
+  background-color: white;
+  width: 50px;
+  height: 20px;
+}
