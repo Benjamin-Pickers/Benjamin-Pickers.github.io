@@ -8,6 +8,7 @@
 body{
   background-color: #20D2FF;
   margin: 1%;
+  overflow: hidden;
 }
 
 /**Container for both matrices**/
@@ -126,6 +127,7 @@ h1
 #answer
 {
   visibility: hidden;
+  height: auto;
   margin-top: 40%;
   font-family: monospace;
 }
