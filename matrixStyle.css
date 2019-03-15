@@ -3,6 +3,7 @@
 {
     margin: auto;
     text-align: center;
+    margin-left: 150px;
 }
 
 body{
@@ -14,6 +15,7 @@ body{
 /**Container for both matrices**/
 #matrices
 {
+  margin-left: 150px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -71,6 +73,7 @@ h1
 /** div that holds the button to invoke calculations and the add zeros button**/
 #calcDiv
 {
+  margin-left: 150px;
   display: flex;
   justify-content: center;
 }
@@ -99,6 +102,38 @@ h1
 {
   border-color: #DACD20;
   background-color: #F1F11A;
+}
+
+/** side panel and content **/
+.sidePanel
+{
+  height: 90%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 10px;
+  left: 10px;
+  overflow-x: hidden;
+  padding-top: 20px;
+  background-color: #3985E9;
+  border: solid 3px #3985E9;
+  border-radius: 10px;
+}
+
+.sideContent
+{
+ margin: 10%;
+}
+
+li.sideContent:hover
+{
+  color: #00E1DA;
+}
+
+p.sideContent
+{
+  text-decoration: underline;
+  font-size: 20px;
 }
 
 /** style for modal and the close button**/
