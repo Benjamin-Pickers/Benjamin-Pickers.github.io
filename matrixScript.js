@@ -16,6 +16,10 @@ window.onload= function()
     $('#createButton').on('click', createMatrix);
 }
 
+$('#answerModal').on('hidden.bs.modal', function (e) {
+  $('#answerMatrix').remove();
+})
+
 //function ensures that column1 size always equals row2 size
 function changeFunc()
 {
@@ -84,8 +88,7 @@ function createMatrix()
     if(validate)
     {
       $('#answer').css('visibility', 'visible');
-      var $content = $('#answer').detach();
-      modal.open({content: $content, width: 340, height: 300});
+      $('#answerModal').modal('show');
     }
   });
 }
@@ -128,9 +131,10 @@ function multiplyMatrix(row1, col1, row2, col2)
 
   //test to see if arrays hold any non-digit characters
   //validate will be true if it does contain illegal characters
-  var regex= /[^-]?[\D]/;
+  var regex= /^[-]?[\d]+$/;
   var multiplicationValid =false;
   var validate1= array1.every( function(e){
+
     return regex.test(e);
   });
 
@@ -139,7 +143,7 @@ function multiplyMatrix(row1, col1, row2, col2)
   });
 
   //if both arrays have no non-digit characters then proceed
-  if(!validate1 && !validate2)
+  if(validate1 && validate2)
   {
     //create two new arrays that have each element as an array of the corresponding rows values
     //do this by splicing the arrays according to their column size and then pushing that value onto a new array
@@ -174,7 +178,7 @@ function multiplyMatrix(row1, col1, row2, col2)
     // multiplicationValid returns true so that we know to create the modal
     multiplicationValid=true;
 
-    $('body').append('<div id="answer"> </div>');
+    $('.modal-body').append('<div id="answer" class="d-flex justify-content-center align-items-center"> </div>');
     $('#answer').append('<table id="answerMatrix"> </table>');
 
     //create a new table with the values of result and append it to the answer calcDiv
@@ -191,7 +195,8 @@ function multiplyMatrix(row1, col1, row2, col2)
  }//closes if statement
  else
  {
-   alert("Please Only Numbers")
+   $('#errorMsg').modal('show');
  }
+
  return  multiplicationValid;
 }//closes function

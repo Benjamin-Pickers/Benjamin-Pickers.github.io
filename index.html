@@ -2,32 +2,77 @@
 <html lang="en">
   <head>
       <meta charset="UTF-8">
-      <link href="matrixStyle.css" type="text/css" rel="stylesheet">
       <title> Multiplying Matrices </title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <link href="matrixStyle.css" type="text/css" rel="stylesheet">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   </head>
 
   <body>
-    <div id="main">
-      <h1>Matrix Multiplier</h1>
-      <p class="start">First Matrix Dimensions <select id="row1" class="instantiate"></select> X <select id="col1" class="instantiate"></select></p>
-      <p class="start">Second Matrix Dimensions <select id="row2" class="instantiate"></select> X <select id="col2" class="instantiate"></select></p>
-      <p> <button id="createButton"> Create Matrices </button> </p>
-    </div>
-    <div class="sidePanel">
-      <p class="sideContent"> Matrix Operations </p>
-        <li class="sideContent"> Matrix Multiplication </li>
-        <li class="sideContent"> Determinant </li>
-    </div>
-    <div id ="matrices">
-      <table id="matrix1">
-      </table>
-      <table id="matrix2">
-      </table>
-    </div>
-    <div id="calcDiv"></div>
-    <div id="answer"></div>
-    <script src="jquery-3.3.1.js"></script>
-    <script src="modal-window.js"></script>
+
+<!-- Modal to display answer-->
+    <div class="modal fade" id="answerModal" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+          </div>
+        </div>
+      </div>
+
+<!-- Modal to display error-->
+      <div class="modal fade" id="errorMsg" tabindex="-1" role="dialog" aria-labelledby="ModalCenterError" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              Please Enter Only Numbers.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+          </div>
+        </div>
+
+<!-- Menu bar on top of the page-->
+      <nav class="navbar navbar-expand-sm fixed top">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Matrix Multiplication</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Determinant</a>
+            </li>
+          </ul>
+        </nav>
+
+<div class="container mx-md-auto rounded">
+      <div id="main" class="col-10 d-flex flex-column mx-auto">
+            <h1 class="d-inline">Matrix Multiplier</h1>
+            <p class="start">First Matrix <select id="row1" class="instantiate"></select> &times; <select id="col1" class="instantiate"></select></p>
+            <p class="start">Second Matrix <select id="row2" class="instantiate"></select> &times; <select id="col2" class="instantiate"></select></p>
+            <p> <button id="createButton"> Create Matrices </button> </p>
+      </div>
+
+      <div id ="matrices" class="d-flex justify-content-center align-items-center">
+        <table id="matrix1"></table>
+        <table id="matrix2"></table>
+      </div>
+
+      <div id="calcDiv"></div>
+      <div id="answer"></div>
+
+</div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script> window.jQuery || document.write('<script src="jquery-3.3.1.js"><\/script>') </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="matrixScript.js"></script>
   </body>
 
