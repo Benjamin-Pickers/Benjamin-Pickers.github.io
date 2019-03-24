@@ -12,12 +12,6 @@ body
   background-color: rgba(0, 78, 163, 0.7);
 }
 
-.toast
-{
-  position: absolute;
-   top: 0; right: 0;
-}
-
 h1
 {
   padding: 6px;
@@ -66,7 +60,7 @@ a:hover
   padding: 2px;
   margin: 10px;
   text-align: center;
-  border: 5px ridge #1C6EA4;
+  
 }
 
 /**Style for individual cells of the matrices**/
@@ -77,6 +71,7 @@ input[type="text"]
   border: solid 2px black;
   width: 55px;
   height: 25px;
+
 }
 
 input[type="text"]:hover
@@ -116,7 +111,7 @@ input[type="text"]:hover
 
 .answerCell
 {
-  border:3px solid black;
+  border: solid 3px black;
   background-color: white;
   width: 50px;
   height: 20px;
