@@ -82,7 +82,7 @@ a:hover
 }
 
 /**Style for individual cells of the matrices**/
-input[type="text"]
+input[type="number"]
 {
   text-align: center;
   font-family: monospace;
@@ -92,9 +92,19 @@ input[type="text"]
 
 }
 
-input[type="text"]:hover
+input[type="number"]:hover
 {
   background-color: #E9823E;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 
 #calcDiv

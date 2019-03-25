@@ -60,7 +60,7 @@ function createMatrix()
     $('#matrix1').append($newContent);
     for(var j=1; j<=col1; j++)
     {
-      $('#matrix1').append('<td><input type="text" id="values1"></td>');
+      $('#matrix1').append('<td><input type="number" id="values1"></td>');
     }
   }
 
@@ -71,7 +71,7 @@ function createMatrix()
     $('#matrix2').append($newContent);
     for(var j=1; j<=col2; j++)
     {
-      $('#matrix2').append('<td><input type="text" id="values2"></td>');
+      $('#matrix2').append('<td><input type="number" id="values2"></td>');
     }
   }
 
