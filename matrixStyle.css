@@ -55,12 +55,30 @@ a:hover
     text-align: center;
 }
 
+.matrixContainer
+{
+  position: relative;
+ width: auto;
+ display: flex;
+ overflow: auto;
+ justify-content: space-evenly safe;
+ -webkit-overflow-scrolling: touch;
+}
+
+#matrices
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  margin: 0 auto;
+}
+
 .styleMatrix
 {
   padding: 2px;
   margin: 10px;
-  text-align: center;
-  
+  flex: 0 0 auto;
 }
 
 /**Style for individual cells of the matrices**/
