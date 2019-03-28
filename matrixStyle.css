@@ -22,6 +22,7 @@ h1
   text-decoration: underline solid rgb(0, 78, 163);
 }
 
+/*navbar and links*/
 .navbar
 {
   background-color: rgb(0, 78, 163);
@@ -55,6 +56,7 @@ a:hover
     text-align: center;
 }
 
+/*Style for matrices and their container*/
 .matrixContainer
 {
   position: relative;
@@ -97,6 +99,7 @@ input[type="number"]:hover
   background-color: #E9823E;
 }
 
+/*gets rid of selector arrows in input fields*/
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -107,6 +110,7 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
+/*Style for multiple and add zero buttons*/
 #calcDiv
 {
   display: flex;
@@ -137,6 +141,7 @@ input[type="number"] {
   background-color: rgb(214, 221, 4);
 }
 
+/*cells of the answer matrix*/
 .answerCell
 {
   border: solid 3px black;
@@ -144,4 +149,20 @@ input[type="number"] {
   width: 50px;
   height: 20px;
   text-align: center;
+}
+
+/*for footer*/
+body{min-height: 100vh;}
+
+footer
+{
+  width: 100%;
+  background-color: rgb(0, 78, 163);
+}
+
+.githubLink
+{
+  width: 25px;
+  height: 25px;
+  padding: 2px;
 }
