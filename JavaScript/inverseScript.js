@@ -12,6 +12,14 @@ window.onload = function()
   $('#createButton').on('click', createMatrix);
 }
 
+$('#answerModal').on('hidden.bs.modal', function (e) {
+  $('#answerMatrix').remove();
+})
+
+
+/*
+  Create the matrix table and buttons
+*/
 function createMatrix()
 {
   //clear both matrices and the button, to advoid duplicates
@@ -38,7 +46,7 @@ function createMatrix()
   }
 
 
-  $('#calcDiv').append('<button id="calcButton"> Find the Determinant </button>');
+  $('#calcDiv').append('<button id="calcButton"> Calculate the Inverse </button>');
   $('#calcDiv').append('<button id="addZero"> Fill Empty Cells </button>');
   $('#calcDiv').append('<button id="clearCells"> Clear all Cells </button>');
 
@@ -48,7 +56,7 @@ function createMatrix()
   //when the calculate button is clicked it creates a modal window with the answers
   $('#calcButton').on('click', function()
   {
-    var validate = calcDeterminant(col1);
+    var validate = calcInverse(col1);
 
     if(validate)
     {
@@ -59,7 +67,9 @@ function createMatrix()
 
 }
 
-////Searches both matrices and fills empty cells with zeros
+/*
+  Searches matrix and fills empty cells with zeros
+*/
 function zeroFunc()
 {
   $('input[id="values1"]').each(function(index, item) {
@@ -70,7 +80,9 @@ function zeroFunc()
   });
 }
 
-////Clears all cells
+/*
+  Clears all cells in the matrix
+*/
 function clearFunc()
 {
   $('input[id="values1"]').each(function(index, item) {
@@ -78,8 +90,12 @@ function clearFunc()
   });
 }
 
-
-function calcDeterminant(col1)
+/*
+  Function for Calculate buttons
+  Calculates the inverse of the matrix and appends it to the answer Modal
+  Return- true if all inputs are valid, false otherwise
+*/
+function calcInverse(col1)
 {
 
   //grabs values of the matrix and stores it in an array
@@ -108,16 +124,41 @@ function calcDeterminant(col1)
       a.push(array1.splice(0, col1));
     }
 
-    var ans = detRec(a);
+    var ans;
+
+    if (a.length == 2)
+    {
+      ans = inverse2(a);
+    }
+    else
+    {
+      ans = inverse(a);
+    }
+
 
     // detValid returns true so that we know to create the modal
     detValid=true;
 
     $('.modal-body').append('<div id="answer" class="d-flex justify-content-center align-items-center"> </div>');
     $('#answer').append('<p id="answerMatrix"> </p>');
-    $('#answerMatrix').html(ans);
 
+    if( ans == 0)
+    {
+      $('#answerMatrix').append('<p> This matrix has no inverse </p>');
+    }
+    else
+    {
+      for(var i=0; i < ans.length; i++)
+      {
+        $('#answerMatrix').append('<tr> </tr>');
 
+        for(var j=0; j < ans[0].length; j++)
+        {
+          var value = ans[i][j];
+          $("#answerMatrix").append('<td class="answerCell">'+value+'</td>');
+        }
+      }//closes for loop
+    }
   }
   else
   {
@@ -127,19 +168,86 @@ function calcDeterminant(col1)
  return  detValid;
 }
 
-//Recursive function to calculate the determinant
-function detRec(a)
+
+/*
+  Calculate Inverse of nxn matrix, where n>2
+  Return- Inverted matrix if it can be, otherwise return 0
+*/
+function inverse(a)
 {
-    if (a.length==2)
+  var inv = [];
+  var temp2 = [];
+  var coeff = detRec(a);
+
+  //Check if the matrix even has an inverse (determinant != 0)
+  if(coeff == 0)
+  {
+    return 0;
+  }
+  else
+  {
+    coeff = 1/coeff;
+  }
+
+  //Get the cofactor matrix
+  for (var i =0; i < a.length; i++)
+  {
+    for (var j =0; j < a[0].length; j++)
     {
-      return (a[0][0]*a[1][1])-(a[0][1]*a[1][0]);
+        //Find the determinant at each index
+        var temp = detArray(a, i, j);
+        var det = detRec(temp) * Math.pow(-1, (j+i));
+        temp2.push(det);
     }
-    var answer = 0;
-    for (var i=0; i< a.length; i++)
+    //Push row to inverse matrix
+    inv.push(temp2);
+    temp2 = [];
+  }
+
+  //Transpose the cofactor matrix
+  inv = transpose(inv);
+
+  //Multiply by the coeff ( or 1/det(a))
+  for (var i = 0; i < inv.length; i++)
+  {
+    for (var j = 0; j < inv[0].length; j++)
     {
-        answer += Math.pow(-1,i)*a[0][i]*detRec(detArray(a, 0, i));
+      var num = inv[i][j] * coeff;
+      inv[i][j] = num.toFixed(2);
     }
-    return answer;
+  }
+
+  return inv;
+}
+
+/*
+  Calculate the inverse of a 2x2 matrix
+  Return- Inverted matrix if it can be, otherwise return 0
+*/
+function inverse2(a)
+{
+  var coeff = detRec(a);
+
+  if(coeff == 0)
+  {
+    return 0;
+  }
+  else
+  {
+    coeff = 1 / coeff;
+  }
+
+  var inv = [ [a[1][1], -1 * a[0][1]], [-1 * a[1][0], a[0][0]] ];
+
+  for(var i =0; i < inv.length; i++)
+  {
+    for(var j=0; j < inv[0].length; j++)
+    {
+      var num = inv[i][j] * coeff;
+      inv[i][j] = num.toFixed(2);
+    }
+  }
+  return inv;
 }
 
 /*
@@ -169,4 +277,42 @@ function detArray(a, rowIndex, columnIndex)
   }
 
   return temp;
+}
+
+/*
+  Return- transposed array
+*/
+function transpose(a)
+{
+  var temp = [];
+  var temp2 = [];
+
+  for (var j = 0; j < a[0].length; j++)
+  {
+    for (var i = 0; i < a.length; i++)
+    {
+        temp2.push(a[i][j]);
+    }
+    temp.push(temp2);
+    temp2 = [];
+  }
+  return temp;
+}
+
+/*
+  Recursive function to calculate the determinant
+  Return- value for the determinant
+*/
+function detRec(a)
+{
+    if (a.length==2)
+    {
+      return (a[0][0]*a[1][1])-(a[0][1]*a[1][0]);
+    }
+    var answer = 0;
+    for (var i=0; i< a.length; i++)
+    {
+        answer += Math.pow(-1,i)*a[0][i]*detRec(detArray(a, 0, i));
+    }
+    return answer;
 }

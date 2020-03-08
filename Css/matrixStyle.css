@@ -141,6 +141,19 @@ input[type="number"] {
   background-color: rgb(214, 221, 4);
 }
 
+#clearCells
+{
+  border: 3px solid  rgb(0, 78, 163);
+  border-radius: 15px;
+  background-color: rgb(255, 252, 238);
+}
+
+#clearCells:hover
+{
+  background-color: rgb(214, 221, 4);
+}
+
+
 /*cells of the answer matrix*/
 .answerCell
 {
