@@ -20,7 +20,9 @@ $('#answerModal').on('hidden.bs.modal', function (e) {
   $('#answerMatrix').remove();
 })
 
-//function ensures that column1 size always equals row2 size
+/*
+  Ensures that col1 and row2 are the same number
+*/
 function changeFunc()
 {
       var replace= $(this).val();
@@ -34,8 +36,9 @@ function changeFunc()
       }
 }
 
-////Creates both matrices when the create button is clicked
-////Also creates the multiplication button and its event handler
+/*
+  Creates both matrices and all the buttons
+*/
 function createMatrix()
 {
   //clear both matrices and the button, to advoid duplicates
@@ -96,7 +99,9 @@ function createMatrix()
   });
 }
 
-////Searches both matrices and fills empty cells with zeros
+/*
+  Searches both matrices and fills empty cells with zeros
+*/
 function zeroFunc()
 {
   $('input[id="values1"]').each(function(index, item) {
@@ -128,9 +133,11 @@ function clearFunc()
   });
 }
 
-////Function for computing the product
-////Takes in both matrices row and column count
-////Appends the answer to a div and returns a boolean value stating whether the values were valid
+/*
+  Function for computing the product
+  Parameters- row and column count for both matrices
+  Return- a boolean value stating whether the values were valid
+*/
 function multiplyMatrix(row1, col1, row2, col2)
 {
   //Creates an array from the values of the first matrix
@@ -207,12 +214,12 @@ function multiplyMatrix(row1, col1, row2, col2)
         var value = result[i][j];
         $("#answerMatrix").append('<td class="answerCell">'+value+'</td>');
       }
-    }//closes for loop
- }//closes if statement
+    }
+ }
  else
  {
    $('#errorMsg').modal('show');
  }
 
  return  multiplicationValid;
-}//closes function
+}

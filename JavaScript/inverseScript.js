@@ -93,6 +93,7 @@ function clearFunc()
 /*
   Function for Calculate buttons
   Calculates the inverse of the matrix and appends it to the answer Modal
+  Parameter- number of columns of the matrix
   Return- true if all inputs are valid, false otherwise
 */
 function calcInverse(col1)
@@ -171,6 +172,7 @@ function calcInverse(col1)
 
 /*
   Calculate Inverse of nxn matrix, where n>2
+  Parameter- nxn matrix
   Return- Inverted matrix if it can be, otherwise return 0
 */
 function inverse(a)
@@ -195,7 +197,7 @@ function inverse(a)
     for (var j =0; j < a[0].length; j++)
     {
         //Find the determinant at each index
-        var temp = detArray(a, i, j);
+        var temp = detRemove(a, i, j);
         var det = detRec(temp) * Math.pow(-1, (j+i));
         temp2.push(det);
     }
@@ -222,6 +224,7 @@ function inverse(a)
 
 /*
   Calculate the inverse of a 2x2 matrix
+  Parameter- 2x2 matrix
   Return- Inverted matrix if it can be, otherwise return 0
 */
 function inverse2(a)
@@ -253,9 +256,10 @@ function inverse2(a)
 /*
   Removes specifed row and column, and returns array
   Used for finding the determinant at a specific index
+  Parameter- matrix, row index to remove and column index to remove
   Return- An array without the row and column given
 */
-function detArray(a, rowIndex, columnIndex)
+function detRemove(a, rowIndex, columnIndex)
 {
   var temp = [];
   var temp2 = [];
@@ -280,6 +284,8 @@ function detArray(a, rowIndex, columnIndex)
 }
 
 /*
+  Transposes a matrix
+  Parameter- nxn matrix
   Return- transposed array
 */
 function transpose(a)
@@ -301,6 +307,7 @@ function transpose(a)
 
 /*
   Recursive function to calculate the determinant
+  Parameter- nxn matrix
   Return- value for the determinant
 */
 function detRec(a)
@@ -312,7 +319,7 @@ function detRec(a)
     var answer = 0;
     for (var i=0; i< a.length; i++)
     {
-        answer += Math.pow(-1,i)*a[0][i]*detRec(detArray(a, 0, i));
+        answer += Math.pow(-1,i)*a[0][i]*detRec(detRemove(a, 0, i));
     }
     return answer;
 }

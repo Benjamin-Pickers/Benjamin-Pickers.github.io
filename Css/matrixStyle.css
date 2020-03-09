@@ -110,7 +110,7 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-/*Style for multiple and add zero buttons*/
+/*Style for calculate, add zero and clear cells buttons*/
 #calcDiv
 {
   display: flex;

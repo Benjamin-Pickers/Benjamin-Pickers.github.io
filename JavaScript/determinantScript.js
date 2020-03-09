@@ -12,6 +12,9 @@ window.onload = function()
   $('#createButton').on('click', createMatrix);
 }
 
+/*
+  Creates matrix and buttons
+*/
 function createMatrix()
 {
   //clear both matrices and the button, to advoid duplicates
@@ -59,7 +62,9 @@ function createMatrix()
 
 }
 
-////Searches both matrices and fills empty cells with zeros
+/*
+  Searches matrix and fills empty cells with zeros
+*/
 function zeroFunc()
 {
   $('input[id="values1"]').each(function(index, item) {
@@ -70,7 +75,9 @@ function zeroFunc()
   });
 }
 
-////Clears all cells
+/*
+  Clears all cells in the matrix
+*/
 function clearFunc()
 {
   $('input[id="values1"]').each(function(index, item) {
@@ -78,7 +85,11 @@ function clearFunc()
   });
 }
 
-
+/*
+  Calculates the determinant and appends answer to the Modal
+  Parameter- the number of columns in the matrix
+  Return-  a boolean value stating whether the values were valid
+*/
 function calcDeterminant(col1)
 {
 
@@ -116,8 +127,6 @@ function calcDeterminant(col1)
     $('.modal-body').append('<div id="answer" class="d-flex justify-content-center align-items-center"> </div>');
     $('#answer').append('<p id="answerMatrix"> </p>');
     $('#answerMatrix').html(ans);
-
-
   }
   else
   {
@@ -127,7 +136,11 @@ function calcDeterminant(col1)
  return  detValid;
 }
 
-//Recursive function to calculate the determinant
+/*
+  Recursive function to calculate the determinant
+  Parameter- a nxn matrix
+  Return- the value of the determinant
+*/
 function detRec(a)
 {
     if (a.length==2)
@@ -137,7 +150,7 @@ function detRec(a)
     var answer = 0;
     for (var i=0; i< a.length; i++)
     {
-        answer += Math.pow(-1,i)*a[0][i]*detRec(detArray(a, 0, i));
+        answer += Math.pow(-1,i)*a[0][i]*detRec(detRemove(a, 0, i));
     }
     return answer;
 }
@@ -145,9 +158,10 @@ function detRec(a)
 /*
   Removes specifed row and column, and returns array
   Used for finding the determinant at a specific index
+  Parameter- the matrix, row index to remove and column index to remove
   Return- An array without the row and column given
 */
-function detArray(a, rowIndex, columnIndex)
+function detRemove(a, rowIndex, columnIndex)
 {
   var temp = [];
   var temp2 = [];
