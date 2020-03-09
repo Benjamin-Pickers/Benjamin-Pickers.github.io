@@ -43,6 +43,7 @@ function createMatrix()
   $('#matrix2').remove();
   $('#calcButton').remove();
   $('#addZero').remove();
+  $('#clearCells').remove();
 
   $('#matrices').append('<table id="matrix1" class="styleMatrix"> </table>');
   $('#matrices').append('<table id="matrix2" class="styleMatrix"> </table>');
@@ -77,8 +78,10 @@ function createMatrix()
 
   $('#calcDiv').append('<button id="calcButton"> Multiply Matrices </button>');
   $('#calcDiv').append('<button id="addZero"> Fill Empty Cells </button>');
+  $('#calcDiv').append('<button id="clearCells"> Clear all Cells </button>');
 
   $('#addZero').on('click', zeroFunc);
+  $('#clearCells').on('click', clearFunc);
 
   //when the calculate button is clicked it creates a modal window with the answers
   $('#calcButton').on('click', function()
@@ -109,7 +112,20 @@ function zeroFunc()
       $(item).val(0);
     }
   });
+}
 
+/*
+  Clears all cells in the matrix
+*/
+function clearFunc()
+{
+  $('input[id="values1"]').each(function(index, item) {
+      $(item).val(' ');
+  });
+
+  $('input[id="values2"]').each(function(index, item) {
+      $(item).val(' ');
+  });
 }
 
 ////Function for computing the product
