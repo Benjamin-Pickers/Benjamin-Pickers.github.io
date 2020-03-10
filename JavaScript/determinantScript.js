@@ -102,10 +102,11 @@ function calcDeterminant(col1)
   //test to see if arrays hold any non-digit characters
   //validate will be true if it does contain illegal characters
   var regex= /^[-]?[\d]+$/;
+  var regex2 = /^[-]?[\d]+[\.]?[\d]+$/;
   var multiplicationValid =false;
   var validate1= array1.every( function(e){
 
-    return regex.test(e);
+    return regex.test(e) || regex2.test(e);
   });
 
   //if both arrays have no non-digit characters then proceed
@@ -120,6 +121,20 @@ function calcDeterminant(col1)
     }
 
     var ans = detRec(a);
+
+    if(isFloat(ans))
+    {
+      var denom = 1;
+      var num = ans * 1;
+      num = num.toFixed(3);
+      var multiple = toInt(num);
+
+      num *= multiple;
+      denom *= multiple;
+
+      ans = reduceFraction(num, denom);
+
+    }
 
     // detValid returns true so that we know to create the modal
     detValid=true;
@@ -183,4 +198,61 @@ function detRemove(a, rowIndex, columnIndex)
   }
 
   return temp;
+}
+
+/*
+  Reduces a fraction to its lowest terms
+  Parameter- numerator and denomerator
+  Return- reduced fraction
+*/
+function reduceFraction(numer, denom)
+{
+
+  var g = gcd(numer, denom);
+  numer /= g;
+  denom /= g;
+
+  if(denom < 0)
+  {
+    numer *= -1;
+    denom *= -1;
+  }
+
+  if(denom == 1)
+  {
+    return numer;
+  }
+
+  return numer+ "/" +denom;
+}
+
+/*
+  Takes a denominator and numerator of a fraction and find the greatest common divisor
+  Parameter- numerator and denominator
+  Return- greatest common divisor
+*/
+function gcd(a, b)
+{
+  if(!b)
+  {
+    return a;
+  }
+
+  return gcd(b, a%b);
+}
+
+function isFloat(num)
+{
+  return num % 1 !== 0;
+}
+
+function toInt(num)
+{
+  var n = 1;
+  while(isFloat(num*n))
+  {
+    n *= 10;
+  }
+
+  return n;
 }

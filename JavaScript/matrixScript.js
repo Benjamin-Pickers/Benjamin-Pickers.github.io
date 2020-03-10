@@ -155,14 +155,15 @@ function multiplyMatrix(row1, col1, row2, col2)
   //test to see if arrays hold any non-digit characters
   //validate will be true if it does contain illegal characters
   var regex= /^[-]?[\d]+$/;
+  var regex2 = /^[-]?[\d]+[\.]?[\d]+$/;
   var multiplicationValid =false;
   var validate1= array1.every( function(e){
 
-    return regex.test(e);
+    return regex.test(e) || regex2.test(e);
   });
 
   var validate2= array2.every( function(e){
-    return regex.test(e);
+    return regex.test(e) || regex2.test(e);
   });
 
   //if both arrays have no non-digit characters then proceed
@@ -194,6 +195,20 @@ function multiplyMatrix(row1, col1, row2, col2)
            {
                sum += a[i][k] * b[k][j];
            }
+
+           if(isFloat(sum))
+           {
+             var denom = 1;
+             var num = sum * 1;
+             num = num.toFixed(3);
+             var multiple = toInt(num);
+
+             num *= multiple;
+             denom *= multiple;
+
+             sum = reduceFraction(num, denom);
+           }
+
            result[i][j] = sum;
        }
     }
@@ -222,4 +237,61 @@ function multiplyMatrix(row1, col1, row2, col2)
  }
 
  return  multiplicationValid;
+}
+
+/*
+  Reduces a fraction to its lowest terms
+  Parameter- numerator and denomerator
+  Return- reduced fraction
+*/
+function reduceFraction(numer, denom)
+{
+
+  var g = gcd(numer, denom);
+  numer /= g;
+  denom /= g;
+
+  if(denom < 0)
+  {
+    numer *= -1;
+    denom *= -1;
+  }
+
+  if(denom == 1)
+  {
+    return numer;
+  }
+
+  return numer+ "/" +denom;
+}
+
+/*
+  Takes a denominator and numerator of a fraction and find the greatest common divisor
+  Parameter- numerator and denominator
+  Return- greatest common divisor
+*/
+function gcd(a, b)
+{
+  if(!b)
+  {
+    return a;
+  }
+
+  return gcd(b, a%b);
+}
+
+function isFloat(num)
+{
+  return num % 1 !== 0;
+}
+
+function toInt(num)
+{
+  var n = 1;
+  while(isFloat(num*n))
+  {
+    n *= 10;
+  }
+
+  return n;
 }

@@ -108,10 +108,11 @@ function calcInverse(col1)
   //test to see if arrays hold any non-digit characters
   //validate will be true if it does contain illegal characters
   var regex= /^[-]?[\d]+$/;
-  var multiplicationValid =false;
+  var regex2 = /^[-]?[\d]+[\.]?[\d]+$/;
+  var detValid =false;
   var validate1= array1.every( function(e){
 
-    return regex.test(e);
+    return regex.test(e) || regex2.test(e);
   });
 
   //if both arrays have no non-digit characters then proceed
@@ -179,16 +180,12 @@ function inverse(a)
 {
   var inv = [];
   var temp2 = [];
-  var coeff = detRec(a);
+  var determinant = detRec(a);
 
   //Check if the matrix even has an inverse (determinant != 0)
-  if(coeff == 0)
+  if(determinant == 0)
   {
     return 0;
-  }
-  else
-  {
-    coeff = 1/coeff;
   }
 
   //Get the cofactor matrix
@@ -209,13 +206,34 @@ function inverse(a)
   //Transpose the cofactor matrix
   inv = transpose(inv);
 
-  //Multiply by the coeff ( or 1/det(a))
+  //Multiply by the 1/determinant
   for (var i = 0; i < inv.length; i++)
   {
     for (var j = 0; j < inv[0].length; j++)
     {
-      var num = inv[i][j] * coeff;
-      inv[i][j] = num.toFixed(2);
+      var num = inv[i][j];
+      var multiple = 1;
+      var det = determinant;
+
+      //Convert float to a fraction
+      if(isFloat(num))
+      {
+        num *= 1;
+        num = num.toFixed(3)
+        multiple = toInt(num);
+      }
+
+      if(isFloat(det))
+      {
+        det = det.toFixed(3);
+        multiple *= toInt(det);
+      }
+
+      num *= multiple;
+      det *= multiple;
+
+      //Reduce the fraction num/det
+      inv[i][j] = reduceFraction(num, det);
     }
   }
 
@@ -229,15 +247,11 @@ function inverse(a)
 */
 function inverse2(a)
 {
-  var coeff = detRec(a);
+  var determinant = detRec(a);
 
-  if(coeff == 0)
+  if(determinant == 0)
   {
     return 0;
-  }
-  else
-  {
-    coeff = 1 / coeff;
   }
 
   var inv = [ [a[1][1], -1 * a[0][1]], [-1 * a[1][0], a[0][0]] ];
@@ -246,8 +260,29 @@ function inverse2(a)
   {
     for(var j=0; j < inv[0].length; j++)
     {
-      var num = inv[i][j] * coeff;
-      inv[i][j] = num.toFixed(2);
+      var num = inv[i][j];
+      var multiple = 1;
+      var det = determinant;
+
+      //Convert float to a fraction
+      if(isFloat(num))
+      {
+        num *= 1;
+        num = num.toFixed(3)
+        multiple *= toInt(num);
+      }
+
+      if(isFloat(det))
+      {
+        det = det.toFixed(3);
+        multiple *= toInt(det);
+      }
+
+      num *= multiple;
+      det *= multiple;
+
+      //Reduce the fraction num/det
+      inv[i][j] = reduceFraction(num, det);
     }
   }
   return inv;
@@ -322,4 +357,61 @@ function detRec(a)
         answer += Math.pow(-1,i)*a[0][i]*detRec(detRemove(a, 0, i));
     }
     return answer;
+}
+
+/*
+  Reduces a fraction to its lowest terms
+  Parameter- numerator and denomerator
+  Return- reduced fraction
+*/
+function reduceFraction(numer, denom)
+{
+
+  var g = gcd(numer, denom);
+  numer /= g;
+  denom /= g;
+
+  if(denom < 0)
+  {
+    numer *= -1;
+    denom *= -1;
+  }
+
+  if(denom == 1)
+  {
+    return numer;
+  }
+
+  return numer+ "/" +denom;
+}
+
+/*
+  Takes a denominator and numerator of a fraction and find the greatest common divisor
+  Parameter- numerator and denominator
+  Return- greatest common divisor
+*/
+function gcd(a, b)
+{
+  if(!b)
+  {
+    return a;
+  }
+
+  return gcd(b, a%b);
+}
+
+function isFloat(num)
+{
+  return num % 1 !== 0;
+}
+
+function toInt(num)
+{
+  var n = 1;
+  while(isFloat(num*n))
+  {
+    n *= 10;
+  }
+
+  return n;
 }
