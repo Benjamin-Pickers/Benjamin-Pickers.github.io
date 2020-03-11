@@ -59,16 +59,17 @@ a:hover
   .offcanvas-header{ display:block; }
   .navbar-collapse
   {
-    position: absolute;
+    position: fixed;
     z-index: 100;
     top:0;
+    right: 0;
     left: 100%;
     width: 100%;
     height: 100%
     padding-right: 1rem;
     padding-left: 1rem;
     overflow-y: auto;
-    visibility: none;
+    visibility: hidden;
     background-color: black;
     transition: visibility .2s ease-in-out, -webkit-transform .2s ease-in-out;
   }
