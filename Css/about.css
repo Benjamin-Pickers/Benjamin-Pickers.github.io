@@ -41,6 +41,46 @@ a:hover
   color: rgb(214, 221, 4);
 }
 
+.toggle-button
+{
+  width: 25px;
+  height: 25px;
+  padding: 2px;
+}
+
+.close-toggle
+{
+  float: right;
+  margin-right: 10px;
+}
+
+.offcanvas-header{ display:none; }
+
+@media (max-width: 992px)
+{
+  .offcanvas-header{ display:block; }
+  .navbar-collapse
+  {
+    position: absolute;
+    z-index: 100;
+    top:0;
+    left: 100%;
+    width: 100%;
+    height: 100%
+    padding-right: 1rem;
+    padding-left: 1rem;
+    overflow-y: auto;
+    visibility: none;
+    background-color: black;
+    transition: visibility .2s ease-in-out, -webkit-transform .2s ease-in-out;
+  }
+  .navbar-collapse.show
+  {
+    visibility: visible;
+    transform: translateX(-100%);
+  }
+}
+
 main
 {
   margin-bottom: 15px;

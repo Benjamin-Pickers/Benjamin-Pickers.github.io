@@ -26,6 +26,10 @@ window.onload = function()
   });
 }
 
+$('#answerModal').on('hidden.bs.modal', function (e) {
+  $('#answerMatrix').remove();
+})
+
 /*
   Creates matrix and buttons
 */

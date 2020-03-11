@@ -46,6 +46,12 @@ a:hover
   padding: 2px;
 }
 
+.close-toggle
+{
+  float: right;
+  margin-right: 10px;
+}
+
 .offcanvas-header{ display:none; }
 
 @media (max-width: 992px)
