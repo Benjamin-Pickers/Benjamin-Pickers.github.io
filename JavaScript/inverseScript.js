@@ -100,7 +100,7 @@ function calcInverse(col1)
   //validate will be true if it does contain illegal characters
   var regex= /^[-]?[\d]+$/;
   var regex2 = /^[-]?[\d]+[\.]?[\d]+$/;
-  var detValid =false;
+  var inputValid =false;
   var validate1= array1.every( function(e){
 
     return regex.test(e) || regex2.test(e);
@@ -129,8 +129,8 @@ function calcInverse(col1)
     }
 
 
-    // detValid returns true so that we know to create the modal
-    detValid=true;
+    // inputValid returns true so that we know to create the modal
+    inputValid=true;
 
     $('.modal-body').append('<div id="answer" class="d-flex justify-content-center align-items-center"> </div>');
     $('#answer').append('<p id="answerMatrix"> </p>');
@@ -158,7 +158,7 @@ function calcInverse(col1)
     $('#errorMsg').modal('show');
   }
 
- return  detValid;
+ return  inputValid;
 }
 
 
