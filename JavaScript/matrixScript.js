@@ -74,22 +74,24 @@ function createMatrix()
   //creates first matrix
   for(var i=1; i<=row1; i++)
   {
-    var $newContent = $('<tr> </tr>');
+    var $newContent = $('<tr>', {id:'r1'+i});
     $('#matrix1').append($newContent);
     for(var j=1; j<=col1; j++)
     {
-      $('#matrix1').append('<td><input type="number" id="values1"></td>');
+      id = '#r1'+i
+      $(id).append('<td><input type="text" id="values1" class="inputCells"></td>');
     }
   }
 
   //creates second matrix
   for(var i=1; i<=row2; i++)
   {
-    var $newContent = $('<tr> </tr>');
+    var $newContent = $('<tr>', {id:'r2'+i});
     $('#matrix2').append($newContent);
     for(var j=1; j<=col2; j++)
     {
-      $('#matrix2').append('<td><input type="number" id="values2"></td>');
+      id = '#r2'+i
+      $(id).append('<td><input type="text" id="values2" class="inputCells"></td>');
     }
   }
 
@@ -99,6 +101,10 @@ function createMatrix()
 
   $('#addZero').on('click', zeroFunc);
   $('#clearCells').on('click', clearFunc);
+
+  $(function () {
+    $('#matrix1').enableCellNavigation();
+  });
 
   //when the calculate button is clicked it creates a modal window with the answers
   $('#calcButton').on('click', function()
@@ -168,12 +174,11 @@ function multiplyMatrix(row1, col1, row2, col2)
 
   //test to see if arrays hold any non-digit characters
   //validate will be true if it does contain illegal characters
-  var regex= /^[-]?[\d]+$/;
-  var regex2 = /^[-]?[\d]+[\.]?[\d]+$/;
+  var regex = /^-?\d+(\.?\d+)?$/;
   var multiplicationValid =false;
   var validate1= array1.every( function(e){
 
-    return regex.test(e) || regex2.test(e);
+    return regex.test(e)
   });
 
   var validate2= array2.every( function(e){

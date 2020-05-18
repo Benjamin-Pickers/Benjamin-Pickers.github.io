@@ -50,11 +50,12 @@ function createMatrix()
   //creates first matrix
   for(var i=1; i<=row1; i++)
   {
-    var $newContent = $('<tr> </tr>');
+    var $newContent = $('<tr>', {id:'r'+i});
     $('#matrix1').append($newContent);
     for(var j=1; j<=col1; j++)
     {
-      $('#matrix1').append('<td><input type="number" id="values1"></td>');
+      id = '#r'+i
+      $(id).append('<td><input type="text" id="values1" class="inputCells"></td>');
     }
   }
 
@@ -65,6 +66,10 @@ function createMatrix()
 
   $('#addZero').on('click', zeroFunc);
   $('#clearCells').on('click', clearFunc);
+
+  $(function () {
+    $('#matrix1').enableCellNavigation();
+  });
 
   //when the calculate button is clicked it creates a modal window with the answers
   $('#calcButton').on('click', function()
@@ -97,12 +102,11 @@ function calcDeterminant(col1)
 
   //test to see if arrays hold any non-digit characters
   //validate will be true if it does contain illegal characters
-  var regex= /^[-]?[\d]+$/;
-  var regex2 = /^[-]?[\d]+[\.]?[\d]+$/;
+  var regex = /^-?\d+(\.?\d+)?$/;
   var inputValid =false;
   var validate1= array1.every( function(e){
 
-    return regex.test(e) || regex2.test(e);
+    return regex.test(e);
   });
 
   //if both arrays have no non-digit characters then proceed
@@ -133,7 +137,7 @@ function calcDeterminant(col1)
     }
 
     // inputValid returns true so that we know to create the modal
-    detValid=true;
+    inputValid=true;
 
     $('.modal-body').append('<div id="answer" class="d-flex justify-content-center align-items-center"> </div>');
     $('#answer').append('<p id="answerMatrix"> </p>');

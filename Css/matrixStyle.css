@@ -125,7 +125,7 @@ a:hover
 }
 
 /**Style for individual cells of the matrices**/
-input[type="number"]
+.inputCells
 {
   text-align: center;
   font-family: monospace;
@@ -135,7 +135,7 @@ input[type="number"]
 
 }
 
-input[type="number"]:hover
+.inputCells:focus
 {
   background-color: #E9823E;
 }
@@ -147,7 +147,8 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
-input[type="number"] {
+.inputCells
+{
   -moz-appearance: textfield;
 }
 
