@@ -106,6 +106,10 @@ function createMatrix()
     $('#matrix1').enableCellNavigation();
   });
 
+  $(function () {
+    $('#matrix2').enableCellNavigation();
+  });
+
   //when the calculate button is clicked it creates a modal window with the answers
   $('#calcButton').on('click', function()
   {
