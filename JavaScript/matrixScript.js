@@ -186,7 +186,7 @@ function multiplyMatrix(row1, col1, row2, col2)
   });
 
   var validate2= array2.every( function(e){
-    return regex.test(e) || regex2.test(e);
+    return regex.test(e);
   });
 
   //if both arrays have no non-digit characters then proceed
