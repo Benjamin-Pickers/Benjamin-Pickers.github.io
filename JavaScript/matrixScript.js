@@ -149,11 +149,11 @@ function zeroFunc()
 function clearFunc()
 {
   $('input[id="values1"]').each(function(index, item) {
-      $(item).val(' ');
+      $(item).val('');
   });
 
   $('input[id="values2"]').each(function(index, item) {
-      $(item).val(' ');
+      $(item).val('');
   });
 }
 
