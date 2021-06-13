@@ -17,7 +17,7 @@ function zeroFunc()
 function clearFunc()
 {
   $('input[id="values1"]').each(function(index, item) {
-      $(item).val(' ');
+      $(item).val('');
   });
 }
 
